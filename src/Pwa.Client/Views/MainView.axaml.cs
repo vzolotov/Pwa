@@ -30,8 +30,6 @@ namespace Pwa.Client.Views
             DrawerList.PointerReleased += DrawerSelectionChanged;
             DrawerList.KeyUp += DrawerList_KeyUp;
 
-            PageCarousel = this.Get<Carousel>(nameof(PageCarousel));
-
             mainScroller = this.Get<ScrollViewer>(nameof(mainScroller));
             #endregion
         }
@@ -44,20 +42,6 @@ namespace Pwa.Client.Views
 
         public void DrawerSelectionChanged(object sender, RoutedEventArgs args)
         {
-            var listBox = sender as ListBox;
-            if (!listBox.IsFocused && !listBox.IsKeyboardFocusWithin)
-                return;
-            try
-            { 
-                PageCarousel.SelectedIndex = listBox.SelectedIndex;
-                mainScroller.Offset = Vector.Zero;
-                mainScroller.VerticalScrollBarVisibility =
-                    listBox.SelectedIndex == 5 ? ScrollBarVisibility.Disabled : ScrollBarVisibility.Auto;
-                
-            }
-            catch
-            {
-            }
             NavDrawerSwitch.IsChecked = false;
         }
 
